@@ -15,4 +15,4 @@
 - testcontainers
 
 ## ERD
-![스크린샷 2023-10-22 오후 9.53.30.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Flv%2F73k95xtn1xb3rv08wm96lqlr0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_BmcUy2%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-22%20%EC%98%A4%ED%9B%84%209.53.30.png)
+<img width="1276" alt="image" src="https://github.com/runnz121/academic/assets/54499829/d0080075-6525-4fe0-8c51-f8cf33b05df7">
