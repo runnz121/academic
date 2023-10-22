@@ -1,0 +1,4 @@
+rootProject.name = 'academic'
+include 'academic-batch'
+include 'academic-main'
+
