@@ -1,69 +1,124 @@
-plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.1.5'
-	id 'io.spring.dependency-management' version '1.1.3'
-	id 'org.asciidoctor.jvm.convert' version '3.3.2'
-}
+buildscript {
+	ext {
+		springBootVersion = '3.1.5'
+		querydslPluginVersion = '1.0.10'
+		queryDslVersion = '5.0.0'
+	}
+	// plugin repository 설정
+	repositories {
+		mavenCentral()
+		maven { url "https://plugins.gradle.org/m2/" }
+	}
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+		classpath "io.spring.gradle:dependency-management-plugin:1.1.0"
+//		classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:${querydslPluginVersion}")
 
-group = 'com.kuku'
-version = '0.0.1-SNAPSHOT'
-
-java {
-	sourceCompatibility = '17'
-}
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
 	}
 }
 
-repositories {
-	mavenCentral()
-}
+subprojects {
 
-ext {
-	set('snippetsDir', file("build/generated-snippets"))
-	set('springCloudVersion', "2022.0.4")
-}
+	apply plugin: 'java'
+	apply plugin: 'groovy'
+	apply plugin: 'org.springframework.boot'
+//	apply plugin: 'org.asciidoctor.jvm.convert'
+	apply plugin: 'io.spring.dependency-management'
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-batch'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.flywaydb:flyway-core'
-	implementation 'org.flywaydb:flyway-mysql'
-	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.h2database:h2'
-	runtimeOnly 'com.mysql:mysql-connector-j'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
-	testImplementation 'org.springframework.batch:spring-batch-test'
-	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-	testImplementation 'org.springframework.security:spring-security-test'
-	testImplementation 'org.testcontainers:junit-jupiter'
-	testImplementation 'org.testcontainers:mysql'
-}
+	group = 'com.kuku'
+	version = '0.0.1-SNAPSHOT'
+	java {
+		sourceCompatibility = '17'
+	}
 
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+	}
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+
+		implementation 'org.springframework.boot:spring-boot-starter-batch'
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+		implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+		implementation 'org.springframework.boot:spring-boot-starter-security'
+		implementation 'org.springframework.boot:spring-boot-starter-validation'
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		implementation 'org.flywaydb:flyway-core'
+		implementation 'org.flywaydb:flyway-mysql'
+
+		compileOnly 'org.projectlombok:lombok'
+		developmentOnly 'org.springframework.boot:spring-boot-devtools'
+		runtimeOnly 'com.h2database:h2'
+		runtimeOnly 'com.mysql:mysql-connector-j'
+		annotationProcessor 'org.projectlombok:lombok'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+		testImplementation 'org.springframework.batch:spring-batch-test'
+		testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+		testImplementation 'org.springframework.security:spring-security-test'
+		testImplementation 'org.testcontainers:junit-jupiter'
+		testImplementation 'org.testcontainers:mysql'
+
+		// querydsl -> jakarta 패키지 임포트 안되서 5.0.0 명시적으로 작성해줌
+		implementation "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+		implementation "com.querydsl:querydsl-apt:5.0.0:jakarta"
+		implementation "com.querydsl:querydsl-core:5.0.0"
+
+		// annotationProcessor for querydsl
+		annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+		annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+
+		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+	}
+	ext {
+//	set('snippetsDir', file("build/generated-snippets"))
+		set('springCloudVersion', "2022.0.4")
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		}
 	}
 }
 
-tasks.named('test') {
-	outputs.dir snippetsDir
-	useJUnitPlatform()
-}
+// querydsl 설정
+def queryDslProjects = [project(':academic-main')]
+configure(queryDslProjects) {
+	// Q class 생성 위치
+	def queryDslSrcDir = "$buildDir/generated/querydsl"
 
-tasks.named('asciidoctor') {
-	inputs.dir snippetsDir
-	dependsOn test
+//	apply plugin: "com.ewerk.gradle.plugins.querydsl"
+
+//	querydsl {
+//		library = "com.querydsl:querydsl-apt"
+//		jpa = true
+//		querydslSourcesDir = queryDslSrcDir
+//	}
+//	// querydsl dependencies 추가
+//	dependencies {
+//		compile "com.querydsl:querydsl-jpa:${queryDslVersion}"
+//		compile "com.querydsl:querydsl-apt:${queryDslVersion}"
+//		compile "com.querydsl:querydsl-core:${queryDslVersion}"
+//	}
+
+	// queryDsl compile 설정 바탕으로 시작
+//	compileQuerydsl{
+//		options.annotationProcessorPath = configurations.querydsl
+//	}
+
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+		querydsl.extendsFrom compileClasspath
+	}
 }
