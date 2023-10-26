@@ -1,7 +1,7 @@
-package academic.main.test.controller;
+package academic.main._test.controller;
 
-import academic.main.test.domain.TestEntity;
-import academic.main.test.service.TestService;
+import academic.main._test.domain.TestEntity;
+import academic.main._test.service.TestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

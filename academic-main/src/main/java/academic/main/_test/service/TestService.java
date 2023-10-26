@@ -1,7 +1,7 @@
-package academic.main.test.service;
+package academic.main._test.service;
 
-import academic.main.test.domain.TestEntity;
-import academic.main.test.repository.TestRepository;
+import academic.main._test.domain.TestEntity;
+import academic.main._test.repository.TestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
