@@ -1,4 +1,12 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
 plugins {
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
     id 'java'
 }
 
@@ -9,12 +17,39 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    querydsl.extendsFrom compileClasspath
+}
+
 dependencies {
 
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+
+
+    // querydsl -> jakarta 패키지 임포트 안되서 5.0.0 명시적으로 작성해줌
+    implementation "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    implementation "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    implementation "com.querydsl:querydsl-core:5.0.0"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.batch:spring-batch-test'
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+def queryDslProjects = [project(':academic-main')]
+configure(queryDslProjects) {
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+        querydsl.extendsFrom compileClasspath
+    }
 }
 
 test {
