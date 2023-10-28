@@ -3,13 +3,9 @@ package academic.main._test.controller;
 import academic.main._test.domain.TestEntity;
 import academic.main._test.domain.TestRedisEntity;
 import academic.main._test.service.TestService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,6 +32,12 @@ public class TestController {
 
     @GetMapping("/redis/get")
     public ResponseEntity<List<TestRedisEntity>> getRedis() {
-        return ResponseEntity.ok(testService.findTestRedisEntity());
+        return ResponseEntity.ok(testService.findTestRedisEntities());
+    }
+
+    @GetMapping("/redis/cacheable/get/{id}")
+    public ResponseEntity<TestRedisEntity> getRedis(@PathVariable("id") Long id,
+                                                    @RequestBody TestRedisEntity testRedisEntity) {
+        return ResponseEntity.ok(testService.getCacheableRedisEntity(id, testRedisEntity));
     }
 }

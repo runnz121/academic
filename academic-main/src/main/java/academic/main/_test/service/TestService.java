@@ -4,7 +4,9 @@ import academic.main._test.domain.TestEntity;
 import academic.main._test.domain.TestRedisEntity;
 import academic.main._test.repository.TestRedisRepository;
 import academic.main._test.repository.TestRepository;
+import academic.main.config.database.redis.RedisCacheKey;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +30,13 @@ public class TestService {
         testRedisRepository.save(testRedisEntity);
     }
 
-    public List<TestRedisEntity> findTestRedisEntity() {
+    public List<TestRedisEntity> findTestRedisEntities() {
         return (List<TestRedisEntity>) testRedisRepository.findAll();
+    }
+
+    @Cacheable(key = "#id", value = RedisCacheKey.ACADEMIC, cacheManager = "redisCacheManager")
+    public TestRedisEntity getCacheableRedisEntity(Long id, TestRedisEntity testRedisEntity) {
+        testRedisEntity.updateValue2("redis Cacheable");
+        return testRedisEntity;
     }
 }
