@@ -1,7 +1,9 @@
 package academic.main._test.controller;
 
 import academic.main._test.domain.TestEntity;
+import academic.main._test.domain.TestRedisEntity;
 import academic.main._test.service.TestService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,5 +27,15 @@ public class TestController {
     @GetMapping("/get")
     public ResponseEntity<List<TestEntity>> get() {
         return ResponseEntity.ok(testService.findAllTestEntities());
+    }
+
+    @PostMapping("/redis/save")
+    public void saveRedis(@RequestBody TestRedisEntity testRedisEntity) {
+        testService.saveRedisEntity(testRedisEntity);
+    }
+
+    @GetMapping("/redis/get")
+    public ResponseEntity<List<TestRedisEntity>> getRedis() {
+        return ResponseEntity.ok(testService.findTestRedisEntity());
     }
 }
