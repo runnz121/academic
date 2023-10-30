@@ -1,4 +1,4 @@
-package academic.batch._test.domain;
+package academic.batch.test.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

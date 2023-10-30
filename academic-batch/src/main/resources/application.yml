@@ -1,27 +1,19 @@
 spring:
-  datasource:
-    read:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/academic
-      username: root
-      password: 698427
-      minimum-idle: 5
-      maximum-pool-size: 100
-      max-lifetime: 28800000
-      keepalive-time: 60000
-      idle-timeout: 60000
-      read-only: true
+  main:
+    allow-bean-definition-overriding: true
 
-    write:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/academic
-      username: root
-      password: 698427
-      minimum-idle: 5
-      maximum-pool-size: 100
-      max-lifetime: 28800000
-      keepalive-time: 60000
-      idle-timeout: 60000
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/academic
+    username: root
+    password: 698427
+
+  secondary-datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/academic
+    username: root
+    password: 698427
+
 
   jpa:
     open-in-view: false

@@ -1,6 +1,6 @@
-package academic.batch._test.repository.primary;
+package academic.batch.test.repository.primary;
 
-import academic.batch._test.domain.TestEntity;
+import academic.batch.test.domain.TestEntity;
 import academic.batch.config.database.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
