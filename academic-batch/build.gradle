@@ -1,56 +1,42 @@
-buildscript {
-    ext {
-        queryDslVersion = "5.0.0"
-    }
-}
-
 plugins {
     id 'org.springframework.boot'
     id 'io.spring.dependency-management'
     id 'java'
 }
 
-group = 'org.example'
+group = 'com.kuku'
 version = '0.0.1-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
+sourceCompatibility = '17'
 
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
-    querydsl.extendsFrom compileClasspath
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-batch'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-    // querydsl -> jakarta 패키지 임포트 안되서 5.0.0 명시적으로 작성해줌
-    implementation "com.querydsl:querydsl-jpa:5.0.0:jakarta"
-    implementation "com.querydsl:querydsl-apt:5.0.0:jakarta"
-    implementation "com.querydsl:querydsl-core:5.0.0"
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+
+    // Querydsl 추가
+    annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa")
+    // querydsl JPAAnnotationProcessor 사용 지정
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+    // java.lang.NoClassDefFoundError(javax.annotation.Entity) 발생 대응
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+    // java.lang.NoClassDefFoundError (javax.annotation.Generated) 발생 대응
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.batch:spring-batch-test'
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
-}
-
-def queryDslProjects = [project(':academic-batch')]
-configure(queryDslProjects) {
-
-    configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
-        }
-        querydsl.extendsFrom compileClasspath
-    }
-}
-
-test {
-    useJUnitPlatform()
 }

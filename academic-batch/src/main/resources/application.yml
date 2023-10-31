@@ -1,19 +1,19 @@
+
+#  main:
+#    allow-bean-definition-overriding: true
 spring:
-  main:
-    allow-bean-definition-overriding: true
-
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/academic
-    username: root
-    password: 698427
+    primary:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/academic
+      username: root
+      password: 698427
 
-  secondary-datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/academic
-    username: root
-    password: 698427
-
+    secondary:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/academic
+      username: root
+      password: 698427
 
   jpa:
     open-in-view: false
