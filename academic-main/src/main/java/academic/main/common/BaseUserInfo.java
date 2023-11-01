@@ -1,22 +1,21 @@
-package academic.main.user.domain;
+package academic.main.common;
 
+import academic.main.user.domain.Birth;
+import academic.main.user.domain.Email;
+import academic.main.user.domain.Phone;
+import academic.main.user.domain.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.Hibernate;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 @Getter
-@EntityListeners(AuditingEntityListener.class)
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
 @Table(name = "user")
-public abstract class BaseUserInfo {
+public abstract class BaseUserInfo extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,14 +35,6 @@ public abstract class BaseUserInfo {
     protected Birth birth;
 
     protected UserRole userRole;
-
-    @CreatedDate
-    @Column(name = "created_at")
-    protected LocalDateTime createAt;
-
-    @LastModifiedDate
-    @Column(name = "updated_at")
-    protected LocalDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {
