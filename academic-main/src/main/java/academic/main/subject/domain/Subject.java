@@ -40,9 +40,9 @@ public class Subject extends Audit {
     }
 
     public static Subject of(String name,
-                             SubjectType type,
-                             SubjectCode code) {
-
+                             SubjectCode code,
+                             SubjectType type
+    ) {
         return Subject.builder()
                 .name(name)
                 .type(type)

@@ -10,10 +10,11 @@ public record CreateSubjectRequest(
         SubjectType type
 ) {
     public Subject toEntity() {
+
         return Subject.of(
                 this.name,
-                this.type,
-                this.code
+                this.code,
+                this.type
         );
     }
 }
