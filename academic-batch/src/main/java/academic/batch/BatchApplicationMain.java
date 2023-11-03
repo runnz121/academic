@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients
-@EnableBatchProcessing
 @SpringBootApplication(exclude={SecurityAutoConfiguration.class})
 public class BatchApplicationMain {
     public static void main(String[] args) {

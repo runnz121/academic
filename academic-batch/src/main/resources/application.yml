@@ -1,20 +1,35 @@
 
 #  main:
 #    allow-bean-definition-overriding: true
+
+#  datasource:
+#    primary:
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      jdbc-url: jdbc:mysql://localhost:3306/academic
+#      username: root
+#      password: 698427
+#
+#    secondary:
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      jdbc-url: jdbc:mysql://localhost:3306/academic
+#      username: root
+#      password: 698427
+
+primary:
+  datsource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/academic
+    username: root
+    password: 698427
+
+secondary:
+  datsource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/academic
+    username: root
+    password: 698427
+
 spring:
-  datasource:
-    primary:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/academic
-      username: root
-      password: 698427
-
-    secondary:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/academic
-      username: root
-      password: 698427
-
   jpa:
     open-in-view: false
     properties:
@@ -30,7 +45,6 @@ spring:
     sql-migration-suffixes: .sql
     locations: classpath:/db/migration
     baseline-version: 0
-
 
 logging.level:
   org.hibernate.SQL: debug

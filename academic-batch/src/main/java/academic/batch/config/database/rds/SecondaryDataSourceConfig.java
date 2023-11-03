@@ -19,64 +19,47 @@ import javax.sql.DataSource;
 import java.util.Objects;
 
 @Configuration
-//@EnableTransactionManagement
-//@EnableJpaRepositories(
-//        entityManagerFactoryRef = "secondaryEntityManagerFactory",
-//        transactionManagerRef = "secondaryTransactionManager",
-//        basePackages = "academic.batch.test.repository.secondary"
-//        ,
+@EnableTransactionManagement
+@EnableJpaRepositories(
+        entityManagerFactoryRef = "secondaryEntityManagerFactory",
+        transactionManagerRef = "secondaryTransactionManager",
+        basePackages = {"academic.batch.test.repository.secondary"}
 //        basePackages = DBConstants.PACKAGE, includeFilters = {
 //                @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Secondary.class)
 //        }
-//)
+)
 public class SecondaryDataSourceConfig {
 
-    @Bean(name = "secondaryDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.secondary")
-    public DataSource secondaryDataSource() {
-        return DataSourceBuilder.create().build();
+    @Bean
+    @ConfigurationProperties("secondary.datasource")
+    public DataSourceProperties secondaryDataSourceProperties() {
+        return new DataSourceProperties();
     }
 
-    @Bean(name = "secondaryEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean readEntityManagerFactory(EntityManagerFactoryBuilder builder,
-                                                                           @Qualifier("secondaryDataSource") DataSource dataSource) {
+    @Bean
+    @ConfigurationProperties("spring.datasource.configuration")
+    public DataSource secondaryDataSource(
+            @Qualifier("secondaryDataSourceProperties") DataSourceProperties dataSourceProperties
+    ) {
+        return dataSourceProperties
+                .initializeDataSourceBuilder()
+                .type(HikariDataSource.class).build();
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean secondaryEntityManagerFactory(EntityManagerFactoryBuilder builder,
+                                                                                @Qualifier("secondaryDataSource") DataSource dataSource) {
         return builder
                 .dataSource(dataSource)
-                .packages("academic.batch.test.domain") // Replace with your package name
+                .packages("academic.batch.test.domain")
                 .persistenceUnit("secondaryEntityManager")
                 .build();
     }
 
-
-//    @Bean
-//    @ConfigurationProperties("secondary.datasource")
-//    public DataSourceProperties secondaryDatasourceProperties() {
-//        return new DataSourceProperties();
-//    }
-//
-//    @Bean(name = "secondaryDataSource")
-//    @ConfigurationProperties("secondary.datasource.configuration")
-//    public DataSource secondaryDataSource() {
-//        return secondaryDatasourceProperties()
-//                .initializeDataSourceBuilder()
-//                .type(HikariDataSource.class)
-//                .build();
-//    }
-//
-//    @Bean(name = "secondaryEntityManagerFactory")
-//    public LocalContainerEntityManagerFactoryBean secondaryEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-//        DataSource dataSource = secondaryDataSource();
-//        return builder
-//                .dataSource(dataSource)
-//                .packages("academic.batch.test.domain")
-//                .persistenceUnit("secondaryEntityManager")
-//                .build();
-//    }
-//
-//    @Bean(name = "secondaryTransactionManager")
-//    public PlatformTransactionManager secondaryTransactionManager(
-//            @Qualifier("secondaryEntityManagerFactory") LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean
-//    ) {
-//        return new JpaTransactionManager(Objects.requireNonNull(localContainerEntityManagerFactoryBean.getObject()));
-//    }
+    @Bean
+    public PlatformTransactionManager secondaryTransactionManager(
+            @Qualifier("secondaryEntityManagerFactory") EntityManagerFactory entityManagerFactory
+    ) {
+        return new JpaTransactionManager(entityManagerFactory);
+    }
 }

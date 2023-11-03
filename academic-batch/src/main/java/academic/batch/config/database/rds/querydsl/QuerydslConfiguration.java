@@ -5,7 +5,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class QuerydslConfiguration {
@@ -16,7 +15,6 @@ public class QuerydslConfiguration {
     @PersistenceContext(unitName = "secondaryEntityManager")
     EntityManager secondaryEntityManager;
 
-    @Primary
     @Bean(name = "primaryQueryFactory")
     public JPAQueryFactory primaryQueryFactory() {
         return new JPAQueryFactory(primaryEntityManager);
