@@ -30,14 +30,14 @@ import javax.sql.DataSource;
 public class PrimaryDataSourceConfig {
     @Primary
     @Bean
-    @ConfigurationProperties("primary.datasource")
+    @ConfigurationProperties("spring.datasource.primary")
     public DataSourceProperties primaryDataSourceProperties() {
         return new DataSourceProperties();
     }
 
     @Primary
     @Bean
-    @ConfigurationProperties("primary.datasource.configuration")
+    @ConfigurationProperties("spring.datasource.primary.configuration")
     public DataSource primaryDataSource(
             @Qualifier("primaryDataSourceProperties") DataSourceProperties dataSourceProperties
     ) {

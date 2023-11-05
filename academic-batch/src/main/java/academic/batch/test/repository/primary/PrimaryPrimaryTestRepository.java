@@ -5,5 +5,7 @@ import academic.batch.config.database.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Primary
-public interface TestRepository extends JpaRepository<TestEntity, Long>, TestRepositoryCustom {
+public interface PrimaryPrimaryTestRepository extends JpaRepository<TestEntity, Long>, PrimaryTestRepositoryCustom {
+
+
 }
