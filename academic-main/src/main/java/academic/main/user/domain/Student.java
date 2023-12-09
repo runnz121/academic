@@ -11,7 +11,14 @@ import lombok.Getter;
 @DiscriminatorValue("student")
 public class Student extends BaseUserInfo {
 
+    // 학번
     @Embedded
     private StudentNumber studentNumber;
+
+    // 이수 학기 수
+//    @Embedded
+//    private CompletedSemester
+
+    // 과거 수강 내역
 
 }

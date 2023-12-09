@@ -17,6 +17,7 @@ public class SubjectController {
 
     private final SubjectCreateService subjectCreateService;
 
+    // 과목 생성
     @PostMapping
     public ResponseEntity<?> create(@RequestBody CreateSubjectRequest request) {
 
