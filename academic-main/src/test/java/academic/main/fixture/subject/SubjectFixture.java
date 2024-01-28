@@ -1,6 +1,6 @@
 package academic.main.fixture.subject;
 
-import academic.main.subject.dto.request.CreateSubjectRequest;
+import academic.main.subject.infrastructure.dto.request.CreateSubjectRequest;
 
 import static academic.main.subject.common.SubjectCode.MATH;
 import static academic.main.subject.common.SubjectType.ESSENTIAL;

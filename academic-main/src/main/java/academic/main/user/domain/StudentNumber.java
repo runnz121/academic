@@ -15,4 +15,7 @@ public class StudentNumber {
     private String studentNumber;
 
     // TODO 학생 수 난수 생성 구현
+
+    public String createStudentNumber() {
+    }
 }

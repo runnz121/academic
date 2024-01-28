@@ -1,6 +1,7 @@
-package academic.main.user.domain;
+package academic.main.user.domain.entity;
 
 import academic.main.common.BaseUserInfo;
+import academic.main.user.domain.AdminNumber;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;

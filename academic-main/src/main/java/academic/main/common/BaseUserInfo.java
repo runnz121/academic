@@ -3,9 +3,11 @@ package academic.main.common;
 import academic.main.user.domain.Birth;
 import academic.main.user.domain.Email;
 import academic.main.user.domain.Phone;
-import academic.main.user.domain.UserRole;
+import academic.main.user.domain.UserType;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 
 import java.util.Objects;
@@ -14,6 +16,8 @@ import java.util.Objects;
 @Getter
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
+@SuperBuilder
+@NoArgsConstructor
 @Table(name = "user")
 public abstract class BaseUserInfo extends Audit {
 
@@ -34,7 +38,7 @@ public abstract class BaseUserInfo extends Audit {
     @Embedded
     protected Birth birth;
 
-    protected UserRole userRole;
+    protected UserType userType;
 
     @Override
     public boolean equals(Object o) {

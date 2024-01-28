@@ -1,4 +1,4 @@
-package academic.main.subject.dto.request;
+package academic.main.subject.infrastructure.dto.request;
 
 import academic.main.subject.common.SubjectCode;
 import academic.main.subject.common.SubjectType;
