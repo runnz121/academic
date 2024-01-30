@@ -1,10 +1,13 @@
 package academic.main.user.domain;
 
+import academic.main.common.DateUtils;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Embeddable
@@ -14,8 +17,15 @@ public class StudentNumber {
     @Column(name = "student_number")
     private String studentNumber;
 
-    // TODO 학생 수 난수 생성 구현
+    public static StudentNumber from(String id) {
+        return new StudentNumber(id);
+    }
 
-    public String createStudentNumber() {
+    private StudentNumber(String id) {
+        this.studentNumber = createStudentNumber(id);
+    }
+
+    public String createStudentNumber(String id) {
+        return "%s%s".formatted(DateUtils.toString(LocalDateTime.now(), DateUtils.YYYYMMDD), id);
     }
 }

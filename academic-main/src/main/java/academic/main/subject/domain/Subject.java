@@ -8,11 +8,12 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SuperBuilder
 @EntityListeners(AuditingEntityListener.class)
 public class Subject extends Audit {
 
@@ -32,11 +33,8 @@ public class Subject extends Audit {
     @Enumerated(EnumType.STRING)
     private SubjectCode code;
 
-    @Builder
-    public Subject(String name, SubjectType type, SubjectCode code) {
-        this.name = name;
-        this.type = type;
-        this.code = code;
+    public Subject() {
+        super();
     }
 
     public static Subject of(String name,

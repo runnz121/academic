@@ -9,8 +9,8 @@ import lombok.Getter;
 
 @Entity
 @Getter
-@DiscriminatorValue("admin")
-public class Admin extends BaseUserInfo {
+@DiscriminatorValue("AD")
+public class Administrator extends BaseUserInfo {
 
     @Embedded
     private AdminNumber adminNumber;

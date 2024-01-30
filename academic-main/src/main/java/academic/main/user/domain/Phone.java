@@ -25,7 +25,9 @@ public class Phone {
     }
 
     private Phone(String inputPhoneNumber) {
+
         validate(inputPhoneNumber);
+
         this.phoneNumber = inputPhoneNumber;
     }
 
@@ -33,7 +35,7 @@ public class Phone {
         Pattern pattern = Pattern.compile(PHONE_REGEX);
         Matcher matcher = pattern.matcher(inputPhoneNumber);
 
-        if ( ! matcher.matches()) {
+        if (!matcher.matches()) {
             throw new InvalidatePhoneNumberException(inputPhoneNumber);
         }
     }

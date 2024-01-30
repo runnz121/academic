@@ -5,6 +5,7 @@ import academic.main.user.domain.Email;
 import academic.main.user.domain.Phone;
 import academic.main.user.domain.UserType;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -14,10 +15,10 @@ import java.util.Objects;
 
 @Entity
 @Getter
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
 @SuperBuilder
-@NoArgsConstructor
+@DiscriminatorColumn
+@Inheritance(strategy = InheritanceType.JOINED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "user")
 public abstract class BaseUserInfo extends Audit {
 

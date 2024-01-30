@@ -25,7 +25,9 @@ public class StudentController {
     @Secured(SecurityUserRoles.ROLE_ADMIN)
     @PostMapping("/create")
     public ResponseEntity<?> create(@Valid @RequestBody CreateStudentRequest request) {
+
         userCreateService.createUser(request);
+
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
