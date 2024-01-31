@@ -5,11 +5,16 @@ import academic.main.user.domain.AdminNumber;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
-@DiscriminatorValue("AD")
+@SuperBuilder
+@DiscriminatorValue(value = "admin")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Administrator extends BaseUserInfo {
 
     @Embedded
