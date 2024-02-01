@@ -2,6 +2,7 @@ package academic.main.user.application.service.provider.impl;
 
 import academic.main.user.application.service.provider.UserProvider;
 import academic.main.user.domain.UserType;
+import academic.main.user.domain.entity.Student;
 import academic.main.user.domain.service.StudentService;
 import academic.main.user.ui.dto.request.CreateStudentRequest;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +26,10 @@ public class StudentImpl implements UserProvider {
     @Override
     public void createUser(CreateStudentRequest request) {
 
-//        Students createStudent = Students.toEntity(request);
+        Student createStudent = Student.toEntity(request);
 
-//        studentService.createStudent(createStudent);
+        studentService.createStudent(createStudent);
 
-//        log.info("USER:STUDENT:CREATE 학생이 정상적으로 등록되었습니다. createStudent : {}", createStudent);
+        log.info("USER:STUDENT:CREATE 학생이 정상적으로 등록되었습니다. createStudent : {}", createStudent);
     }
 }

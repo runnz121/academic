@@ -33,7 +33,7 @@ public class Email {
         Pattern pattern = Pattern.compile(EMAIL_REGEX);
         Matcher matcher = pattern.matcher(inputEmail);
 
-        if ( ! matcher.matches()) {
+        if (!matcher.matches()) {
             throw new InvalidatePhoneNumberException(inputEmail);
         }
     }

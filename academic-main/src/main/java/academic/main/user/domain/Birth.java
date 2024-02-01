@@ -13,4 +13,12 @@ public class Birth {
 
     @Column(name = "birth_date")
     private String birthDate;
+
+    public static Birth from(String birthDate) {
+        return new Birth(birthDate);
+    }
+
+    private Birth(String birthDate) {
+        this.birthDate = birthDate;
+    }
 }

@@ -1,7 +1,7 @@
 package academic.main.user.domain.entity;
 
-import academic.main.common.BaseUserInfo;
-import academic.main.user.domain.StudentNumber;
+import academic.main.user.domain.*;
+import academic.main.user.ui.dto.request.CreateStudentRequest;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -28,11 +28,14 @@ public class Student extends BaseUserInfo {
 
     // 과거 수강 내역
 
-//    public static Students toEntity(CreateStudentRequest request) {
-//        return Students.builder()
-//                .name(request.name())
-//                .studentNumber(StudentNumber.from(request.id()))
-//                .phone(Phone.from(request.phoneNumber()))
-//                .build();
-//    }
+    public static Student toEntity(CreateStudentRequest request) {
+        return Student.builder()
+                .name(request.name())
+                .studentNumber(StudentNumber.from(request.id()))
+                .phone(Phone.from(request.phoneNumber()))
+                .email(Email.from(request.email()))
+                .birth(Birth.from(request.birth()))
+                .userType(UserType.STUDENT)
+                .build();
+    }
 }

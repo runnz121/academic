@@ -1,5 +1,6 @@
-package academic.main.common;
+package academic.main.user.domain.entity;
 
+import academic.main.common.Audit;
 import academic.main.user.domain.Birth;
 import academic.main.user.domain.Email;
 import academic.main.user.domain.Phone;
@@ -24,8 +25,8 @@ public abstract class BaseUserInfo extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    protected Long id;
+    @Column(name = "user_key")
+    protected Long key;
 
     @Column(name = "name")
     protected String name;
@@ -39,6 +40,7 @@ public abstract class BaseUserInfo extends Audit {
     @Embedded
     protected Birth birth;
 
+    @Enumerated(EnumType.STRING)
     protected UserType userType;
 
     @Override
@@ -47,11 +49,11 @@ public abstract class BaseUserInfo extends Audit {
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
             return false;
         BaseUserInfo baseUserInfo = (BaseUserInfo) o;
-        return Objects.equals(id, baseUserInfo.id);
+        return Objects.equals(key, baseUserInfo.key);
     }
 
     @Override
     public int hashCode() {
-        return id.intValue();
+        return key.intValue();
     }
 }

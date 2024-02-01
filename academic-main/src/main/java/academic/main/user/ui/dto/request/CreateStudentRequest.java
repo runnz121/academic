@@ -24,6 +24,9 @@ public record CreateStudentRequest(
         String phoneNumber,
 
         @NotBlank
-        String email
+        String email,
+
+        @NotBlank
+        String birth
 ) {
 }
