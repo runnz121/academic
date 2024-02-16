@@ -1,4 +1,4 @@
-package academic.main.subject.common;
+package academic.main.classes.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

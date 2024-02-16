@@ -1,15 +1,18 @@
 package academic.main.fixture.subject;
 
-import academic.main.subject.infrastructure.dto.request.CreateSubjectRequest;
+import academic.main.classes.ui.dto.request.CreateSubjectRequest;
 
-import static academic.main.subject.common.SubjectCode.MATH;
-import static academic.main.subject.common.SubjectType.ESSENTIAL;
+import java.util.List;
+
+import static academic.main.classes.domain.SubjectCode.MATH;
+import static academic.main.classes.domain.SubjectType.ESSENTIAL;
 
 public class SubjectFixture {
 
     public static CreateSubjectRequest 과목_생성_요청 = new CreateSubjectRequest(
             "수학",
             MATH,
-            ESSENTIAL
+            ESSENTIAL,
+            List.of("수학1", "수학2")
     );
 }

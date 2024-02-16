@@ -1,6 +1,7 @@
 package academic.main.subject.ui;
 
-import academic.main.subject.command.application.SubjectCreateService;
+import academic.main.classes.command.application.SubjectCommandService;
+import academic.main.classes.ui.SubjectController;
 import academic.main.support.TestSupport;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +29,7 @@ class SubjectControllerTest {
     MockMvc mockMvc;
 
     @MockBean
-    SubjectCreateService subjectCreateService;
+    SubjectCommandService subjectCommandService;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -37,7 +38,7 @@ class SubjectControllerTest {
     @DisplayName("과목 생성 요청 테스트")
     void createSubjectPost() throws Exception {
 
-        willDoNothing().given(subjectCreateService).createSubject(any());
+        willDoNothing().given(subjectCommandService).createSubject(any());
 
         mockMvc.perform(
                 post("/v1/subject")

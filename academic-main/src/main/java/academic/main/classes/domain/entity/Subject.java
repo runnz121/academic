@@ -1,19 +1,21 @@
-package academic.main.subject.domain;
+package academic.main.classes.domain.entity;
 
 import academic.main.common.Audit;
-import academic.main.subject.common.SubjectCode;
-import academic.main.subject.common.SubjectType;
+import academic.main.classes.domain.SubjectCode;
+import academic.main.classes.domain.SubjectType;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @SuperBuilder
+@Table(name = "subject")
 @EntityListeners(AuditingEntityListener.class)
 public class Subject extends Audit {
 
@@ -33,8 +35,23 @@ public class Subject extends Audit {
     @Enumerated(EnumType.STRING)
     private SubjectCode code;
 
+    @Builder.Default
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Lecture> lectureList = new ArrayList<>();
+
     public Subject() {
         super();
+    }
+
+    public void addLecture(Lecture lecture) {
+        this.lectureList.add(lecture);
+        if (lecture.getSubject() != this) {
+            lecture.updateSubject(this);
+        }
+    }
+
+    public void addLectureList(List<Lecture> lectureList) {
+        this.lectureList = lectureList;
     }
 
     public static Subject of(String name,

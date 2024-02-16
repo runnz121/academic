@@ -1,6 +1,6 @@
 package academic.main.subject.command.application;
 
-import academic.main.subject.infrastructure.repository.SubjectRepository;
+import academic.main.classes.infrastructure.persistence.repository.SubjectRepository;
 import academic.main.support.JpaTestSupport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static academic.main.fixture.subject.SubjectFixture.과목_생성_요청;
 
 @DisplayName("과목생성 서비스 테스트")
-public class SubjectCreateServiceTest extends JpaTestSupport {
+public class SubjectCommandServiceTest extends JpaTestSupport {
 
     @Autowired
     SubjectRepository subjectRepository;

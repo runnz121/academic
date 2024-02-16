@@ -1,7 +1,7 @@
 package academic.main.user.domain.service;
 
 import academic.main.user.domain.entity.Student;
-import academic.main.user.domain.repository.StudentRepository;
+import academic.main.user.infrastructure.persistence.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
-package academic.main.subject.infrastructure.repository;
+package academic.main.classes.infrastructure.persistence.repository;
 
-import academic.main.subject.domain.Subject;
+import academic.main.classes.domain.entity.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SubjectRepository extends JpaRepository<Subject, Long> {

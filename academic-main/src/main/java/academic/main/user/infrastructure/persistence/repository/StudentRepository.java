@@ -1,4 +1,4 @@
-package academic.main.user.domain.repository;
+package academic.main.user.infrastructure.persistence.repository;
 
 import academic.main.user.domain.entity.Student;
 import org.springframework.data.repository.CrudRepository;
