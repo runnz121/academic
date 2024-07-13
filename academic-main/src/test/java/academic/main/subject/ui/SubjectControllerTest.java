@@ -1,6 +1,6 @@
 package academic.main.subject.ui;
 
-import academic.main.classes.command.application.SubjectCommandService;
+import academic.main.classes.application.command.SubjectService;
 import academic.main.classes.ui.SubjectController;
 import academic.main.support.TestSupport;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,7 +29,7 @@ class SubjectControllerTest {
     MockMvc mockMvc;
 
     @MockBean
-    SubjectCommandService subjectCommandService;
+    SubjectService subjectService;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -38,7 +38,7 @@ class SubjectControllerTest {
     @DisplayName("과목 생성 요청 테스트")
     void createSubjectPost() throws Exception {
 
-        willDoNothing().given(subjectCommandService).createSubject(any());
+        willDoNothing().given(subjectService).createSubject(any());
 
         mockMvc.perform(
                 post("/v1/subject")

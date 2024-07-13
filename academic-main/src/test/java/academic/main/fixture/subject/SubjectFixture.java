@@ -1,6 +1,6 @@
 package academic.main.fixture.subject;
 
-import academic.main.classes.ui.dto.request.CreateSubjectRequest;
+import academic.main.classes.ui.command.request.CreateSubjectRequest;
 
 import java.util.List;
 

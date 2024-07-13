@@ -18,6 +18,12 @@ public class Semester extends Audit {
     @Column(name = "semester_id")
     private Long id;
 
+    @Column(name = "name")
+    private String semesterName;
+
+    @Column
+    private
+
     public Semester() {
 
     }

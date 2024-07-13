@@ -1,10 +1,10 @@
-package academic.main.classes.command.application;
+package academic.main.classes.application.command;
 
 import academic.main.classes.domain.entity.Lecture;
 import academic.main.classes.domain.entity.Subject;
 import academic.main.classes.infrastructure.persistence.repository.LectureRepository;
 import academic.main.classes.infrastructure.persistence.repository.SubjectRepository;
-import academic.main.classes.ui.dto.request.CreateSubjectRequest;
+import academic.main.classes.ui.command.request.CreateSubjectRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class SubjectCommandService {
+public class SubjectService {
 
     private final SubjectRepository subjectRepository;
     private final LectureRepository lectureRepository;
@@ -44,7 +44,6 @@ public class SubjectCommandService {
 
     @Transactional
     public void deleteSubject(Long subjectId) {
-
         subjectRepository.deleteById(subjectId);
     }
 }

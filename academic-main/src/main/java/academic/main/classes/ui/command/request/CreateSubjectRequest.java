@@ -1,4 +1,4 @@
-package academic.main.classes.ui.dto.request;
+package academic.main.classes.ui.command.request;
 
 import academic.main.classes.domain.entity.Subject;
 import academic.main.classes.domain.SubjectCode;
@@ -14,11 +14,6 @@ public record CreateSubjectRequest(
         List<String> lectureNames
 ) {
     public Subject toEntity() {
-
-        return Subject.of(
-                this.name,
-                this.code,
-                this.type
-        );
+        return Subject.of(this.name, this.code, this.type);
     }
 }

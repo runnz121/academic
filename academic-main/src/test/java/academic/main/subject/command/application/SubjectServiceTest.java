@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static academic.main.fixture.subject.SubjectFixture.과목_생성_요청;
 
 @DisplayName("과목생성 서비스 테스트")
-public class SubjectCommandServiceTest extends JpaTestSupport {
+public class SubjectServiceTest extends JpaTestSupport {
 
     @Autowired
     SubjectRepository subjectRepository;

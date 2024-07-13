@@ -1,4 +1,4 @@
-package academic.main.user.ui.dto.request;
+package academic.main.user.ui.command.request;
 
 import academic.main.user.domain.UserType;
 import jakarta.validation.constraints.NotBlank;

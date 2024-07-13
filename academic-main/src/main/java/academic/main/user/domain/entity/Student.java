@@ -1,7 +1,7 @@
 package academic.main.user.domain.entity;
 
 import academic.main.user.domain.*;
-import academic.main.user.ui.dto.request.CreateStudentRequest;
+import academic.main.user.ui.command.request.CreateStudentRequest;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -20,6 +20,7 @@ public class Student extends BaseUserInfo {
     // 학번
     @Embedded
     private StudentNumber studentNumber;
+
 
 
     // 이수 학기 수
